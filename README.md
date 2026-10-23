@@ -35,9 +35,96 @@ STEP-5: Display the obtained cipher text.
 
 
 Program:
+```
 
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
+int main() {
+    char key[100], text[200], matrix[5][5];
+    int used[26] = {0};
+    int i, j, k = 0, row1, col1, row2, col2;
+    char a, b, temp;
 
+    printf("Enter the key: ");
+    scanf("%99s", key);
 
+    printf("Enter the plaintext: ");
+    scanf("%199s", text);
 
+    for (i = 0; key[i] != '\0'; i++) {
+        temp = toupper(key[i]);
+        if (temp == 'J')
+            temp = 'I';
+
+        if (temp >= 'A' && temp <= 'Z' && !used[temp - 'A']) {
+            matrix[k / 5][k % 5] = temp;
+            used[temp - 'A'] = 1;
+            k++;
+        }
+    }
+
+    used['J' - 'A'] = 1;
+
+    for (i = 0; i < 26; i++) {
+        if (!used[i]) {
+            matrix[k / 5][k % 5] = 'A' + i;
+            k++;
+        }
+    }
+
+    for (i = 0; text[i] != '\0'; i++)
+        text[i] = toupper(text[i]);
+
+    for (i = 0; text[i] != '\0'; i++) {
+        if (text[i] == 'J')
+            text[i] = 'I';
+    }
+
+    printf("Encrypted text: ");
+
+    for (i = 0; text[i] != '\0'; i += 2) {
+        a = text[i];
+        b = (text[i + 1] == '\0') ? 'X' : text[i + 1];
+
+        if (a == b)
+            b = 'X';
+
+        for (j = 0; j < 25; j++) {
+            if (matrix[j / 5][j % 5] == a) {
+                row1 = j / 5;
+                col1 = j % 5;
+            }
+            if (matrix[j / 5][j % 5] == b) {
+                row2 = j / 5;
+                col2 = j % 5;
+            }
+        }
+
+        if (row1 == row2) {
+            printf("%c%c",
+                matrix[row1][(col1 + 1) % 5],
+                matrix[row2][(col2 + 1) % 5]);
+        }
+        else if (col1 == col2) {
+            printf("%c%c",
+                matrix[(row1 + 1) % 5][col1],
+                matrix[(row2 + 1) % 5][col2]);
+        }
+        else {
+            printf("%c%c",
+                matrix[row1][col2],
+                matrix[row2][col1]);
+        }
+    }
+
+    printf("\n");
+    return 0;
+}
+
+```
 Output:
+
+<img width="1482" height="292" alt="image" src="https://github.com/user-attachments/assets/fd2bdf3d-f3bd-4c85-9aef-a4886af85778" />
+**RESULT :**
