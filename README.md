@@ -129,6 +129,7 @@ Output:
 <img width="1482" height="292" alt="image" src="https://github.com/user-attachments/assets/fd2bdf3d-f3bd-4c85-9aef-a4886af85778" />
 
 **Result:**
+
 Thus, the Playfair Substitution technique was implemented successfully using C.
 
 
